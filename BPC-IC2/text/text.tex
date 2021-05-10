@@ -277,7 +277,7 @@ Je vhodné testovat mimo běžnou špičku, aby nebyla ohrožena finanční (slu
 Avalanche (hardware, do~40Gbps), Apache jMeter, LOIC.
 
 \clearpage
-\section{Netechnické typy útoků, sociální inženýrství, phising (používané techniky), útoky MitM (ARP spoofing, DNS spoofing, SSL strip, SSL sniff).}
+\section{Netechnické typy útoků (sociální inženýrství, phising; používané techniky), útoky MitM (ARP spoofing, DNS spoofing, SSL strip, SSL sniff).}
 
 \textbf{sociální inženýrství}: psychická manipulace s~lidmi za~účelem zisku informací, přístupu ke~službě nebo provedení podvodu \\
 \textbf{phishing}: kontaktování uživatelů s~cílem získání citlivých informaci pro~škodlivé účely \\
@@ -295,14 +295,53 @@ vydávání se za~jinou profesi (technická podpora, údržba) \\
 
 Využívá se \textbf{manipulace s~odkazy} (modifikace URL, rozdíl mezi obsahem a~cílem \texttt{<a>} tagu pomocí JS), \textbf{obcházení filtrace} (využití obrázků či videa místo textu), \textbf{website tampering} (podvržení webových stránek) nebo \textbf{covert redirect} (přesměrování odkazů na~phishing stránky s~XSS/falešným přihlášením).
 
-% TODO
-\subsection*{MitM}
+\subsection{MitM}
 
-\textbf{ARP spoofing} \dots \textbf{DNS spoofing} \dots \textbf{SSL strip} \dots \textbf{SSL sniff} \dots
+\subsubsection{ARP spoofing}
 
-\begin{center}
-{\huge \dots} zde je třeba doplnit zbytek {\huge \dots}
-\end{center}
+Také \emph{ARP cache Poisoning} nebo \emph{ARP poison Routing}. Jde o~způsob podvrhnutí ARP zpráv na~lokální síti; cílem je asociovat útočníkovu MAC adresu s~IP adresou jiného síťového prvku (brána) a~routovat veškerou komunikaci místo něj. Útočník může způsobit DoS (zahazováním některých paketů) nebo MitM (úpravou dat).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[node distance=3cm]
+\tikzstyle{block} = [rectangle, minimum width=2.5cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{rounded} = [rectangle, rounded corners, minimum width=2cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,<->,>=stealth]
+%
+\node (user)     [block]                                  {User};
+\node (switch)   [block,   right of=user]                 {Switch};
+\node (gateway)  [block,   right of=switch]               {gateway};
+\node (internet) [rounded, right of=gateway]              {internet};
+\node (attacker) [block,   below of=switch, yshift=1.5cm] {\color{red} attacker};
+%
+\draw [arrow]      (user)           -- (switch);
+\draw [arrow]      (switch)         -- (gateway);
+\draw [arrow]      (gateway)        -- (internet);
+\draw [arrow]      (switch)         -- (attacker);
+\draw [arrow, red] (user.east)      -- (attacker.north);
+\draw [arrow, red] (attacker.north) -- (gateway.west);
+\end{tikzpicture}
+\caption*{ARP spoofed network}
+\end{figure}
+
+Při~překladu lokální IP adresy na~MAC dochází k~zaslání broadcast paketu, na~který zařízení s~požadovanou IP adresou pošle odpověď. Tyto zprávy nejsou nijak autentizované, ARP je stateless protokol a~všechna zařízení na~síti automaticky \emph{cachují} ARP odpovědi bez~ohledu na to, jestli o~ně požádaly.
+
+Ochranou může být integrace s~DHCP serverem nebo monitoring ARP provozu.
+
+\subsubsection{DNS spoofing}
+
+Způsob podvrhnutí DNS zpráv a~otrávení DNS cache s~účelem směrovat některé DNS záznamy na~falešné IP adresy. V~normálním prostředí plní roli neautoritativního DNS serveru lokální směrovač, který směrovací data získává od~dalšího DNS serveru (síť, ISP, autoritativní DNS server).
+
+DNSSEC zaručuje bezpečnost komunikace s~DNS servery. Všechny odpovědi z~DNSSEC zón jsou podepsány. Krom \texttt{A}/\texttt{AAAA} záznamů lze chránit i~\texttt{TXT}, \texttt{MX} a~další: SSHFP (SSH klíče vázané na~hostname) nebo IPSec klíče. Zajišťuje pouze autentizaci, ne důvěrnost.
+
+\subsubsection{SSL strip}
+
+Degradace HTTPS spojení na~HTTP. Tři roky po~jeho \enquote{objevení} v~roce 2009 bylo vydáno \href{https://datatracker.ietf.org/doc/html/rfc6797}{RFC~6797: HTTP Strict Transport Security (HSTS)}, zavádějící HTTP hlavičku \texttt{Strict-Transport-Security}. Klienti podporující HSTS musí upgradovat na~HTTPS \emph{před}~připojením k~webu, a~pokud není možné TLS spojení navázat (nedůvěryhodný certifikát), spojení by mělo být ukončeno a~na~web by neměl být povolen přístup.%
+\footnote{Mezi limitace HSTS patří náchylnost na~NTP manipulaci (platnost HSTS hlavičky je určena časem: \texttt{Strict-Transport-Security: max-age=31536000}) nebo~na~stripping při~první návštěvě, protože se HSTS hlavička přenáší až~první odpovědí serveru.}
+
+\subsubsection{SSL sniff}
+
+Zachycení TLS. Útočník musí mít k~dispozici certifikát kterému důvěřuje prohlížeč, tj. ukradený certifikát podepsaný CA, nebo falešný a~importovaný do~prohlížeče/systému oběti.
 
 \clearpage
 \section{Protokoly IPsec a TLS (princip, umístění TCP/IP, průběh komunikace, autentizace, utajení a integrita dat).}
@@ -328,20 +367,75 @@ Pro~ustanovení klíče IPSec využívá symetrickou kryptografii: pre-shared ke
 \clearpage
 \subsection{TLS}
 
-Pracuje na~transportní vrstvě (L4): end-to-end šifrování TCP/UDP mezi~klientem a~serverem. Je~složen z~\textbf{handshake} (inicializace spoje, autentikace stran, ustanovení klíče), \textbf{record} (datový přenos, MAC autentizace) a~\textbf{alert} (notifikace chyb a~varování) protokolů.
+Pracuje na~transportní vrstvě (L4): end-to-end šifrování TCP/UDP mezi~klientem a~serverem, pro~aplikační vrstvu transparentní. Je~složen z~\textbf{handshake} (inicializace spoje, autentikace stran, ustanovení klíče), \textbf{record} (datový přenos, MAC autentizace) a~\textbf{alert} (notifikace chyb a~varování) protokolů.
 
 Security strings, např.~\texttt{TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256}.
 
+\begin{itemize}[noitemsep]
+\item Ustanovení klíče: ECDHE, DHE
+\item Podpis: RSA, DSA, ECDSA
+\item Šifrování: AEC-GCM, ChaCha
+\item Hashování: SHA-256, SHA-384
+\end{itemize}
+
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.5\textwidth]{images/tls}
+\includegraphics[width=0.7\textwidth]{images/tls}
+\caption*{Výměna zpráv v~TLS 1.2 a~TLS 1.3}
 \end{figure}
 
-% TODO Doplnit TLS, je toho tady málo
-
-\begin{center}
-{\huge \dots} zde je třeba doplnit zbytek {\huge \dots}
-\end{center}
-
 \clearpage
-\section{Zabezpečení 802.11 (WPA2, používaná kryptografická primitiva, klíčové hospodářství, popis 4Way Handshake, testování bezpečnosti).}
+% TODO WPA handshake není kompletní. Není popsáno co je GTK a jaké jsou obecně požadavky. Celá otázka by chtěla zrevidovat a doplnit
+\section{Zabezpečení 802.11 (WPA2, používaná kryptografická primitiva, klíčové hospodářství, popis 4Way handshake, testování bezpečnosti).}
+
+\textbf{WEP} (Wired Equivalent Privacy): nevhodná implementace šifrování, chybí management klíčů, předvídatelný obsah. Šifrování pomocí 64b/128b RC4 klíčů, integrita CRC-32, jednostranná autentizace. 2w~handshake: open system (pouze požadavek s~SSID sítě), 4w~handshake: požadavek s~SSID, nádhodný řetězec $r$, odpověď $E_{k_\mathrm{priv}}(r)$, přijmutí/odmítnutí. \\
+\textbf{WPA} (WiFi Protected Access): rychlé vydání kvůli nedostatečné bezpečnostni WEP. Autentizace pomocí PSK/IEEE 802.1x, důvěrnost TKIP (Temporal Key Integrity Protocol) s~per-packet obměnou klíče, integrita MIC (Message Integrity Check). Zachována zpětná kompatibilita s~WEP. \\
+\textbf{WPA2} (WPA II): Důvěrnost pomocí AES, integrita CCMP%
+\footnote{Útok \href{https://krackattacks.com}{\textbf{KRACK}}: Key Reinstallation Attacks z~roku 2017.}%
+. \\
+\textbf{WPA3} (WPA III): AES-256-GCM, HMAC SHA-384. SAE (Simultaneous Authentication of~Equals) zajišťuje bezpečnější výměnu a~dopřednou bezpečnost v~Personal módu%
+\footnote{V~dubnu 2019 byla ve~WPA3 objevena zranitelnost \href{https://wpa3.mathyvanhoef.com/}{\textbf{Dragonblood}} umožňující \emph{downgrade} spojení a~útok postranními kanály: umožnění zjištění hesla silou a~DoS útoku na~stanici.}%
+.
+
+\vspace*{1em}\noindent
+\textbf{PMK} (Pairwise Master Key) je získán z~úspěšné autentizace (u~Enterprise zaslán serverem, u~Personal je shodný s~PSK, který se~odvozuje z~hesla%
+\footnote{$\mathrm{PSK} = \mathrm{PBKDF2}(password, SSID, SSID\_length, \mathrm{rounds}=4096, \mathrm{output}=256)$, viz \href{https://datatracker.ietf.org/doc/html/rfc8018}{RFC~8018}.}%
+), další klíče jsou z~něj derivovány hashováním: \\
+\textbf{KCK} (Key Confirmation Key): autentizační zprávy MIC během čtyřcestné výměny, \\
+\textbf{KEK} (Key Encryption Key): zajištění důvěrnostni dat během čtyřcestné výměny, \\
+\textbf{TEK} (Temporary Encryption Key): šifrování dat v~TKIP a~CCMP, \\
+\textbf{TMK} (Temporary MIC Key): autentizace dat v~TKIP.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{ccc}
+\textbf{klient} && \textbf{AP} \\
+\hline
+$\leftarrow$ & ANonce & $\leftarrow$ \\
+vytvoření PTK && \\
+$\rightarrow$ & SNonce + MIC & $\rightarrow$ \\
+&& vytvoření PTK \\
+$\leftarrow$ & GTK + MIC & $\leftarrow$ \\
+$\rightarrow$ & ACK & $\rightarrow$ \\
+\end{tabular}
+\caption*{Čtyřcestná WPA výměna}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l|ccccc}
+& \textbf{WPA-PSK} & \textbf{WPA} & \textbf{WPA2-PSK} & \textbf{WPA2} \\
+\hline
+\textbf{Autentizace} & PSK & 802.1x (PEAP) & PSK & 802.1x (PEAP) \\
+\textbf{Šifrování} & TKIP (RC4) & TKIP (RC4) & CCMP (AES) & CCMP (AES) \\
+\textbf{Enterprise} & nevhodné & dobrá úroveň & nevhodné & nejlepší úroveň \\
+\textbf{Personal} & dobrá úroveň & nevhodné & nejlepší úroveň & nevhodné \\
+\end{tabular}
+\end{table}
+
+\subsection{Testování bezpečnosti}
+
+\textbf{WEP}: pasivní: \texttt{aurodump-ng}, aktivní: \texttt{aireplay-ng} (Chopchop attack, Caffe Latte attack, \dots) \\
+\textbf{WPA}: bruteforce (\texttt{airodump-ng}, \texttt{aircrack-ng}) \& dictionary/rainbow attacks \\
+zmatení uživatele: vytvoření falešného AP a~vyzrazení hesla \\
+automatické nástroje \texttt{wifite}, \texttt{fluxion}
