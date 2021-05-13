@@ -19,8 +19,8 @@ Každá aktualizace spouští automatický build všech předmětových otázek,
 - [x] Prvočísla – popište způsob generování a uveďte příklad pravděpodobnostního testu a skutečného testu.
 - [ ] Teorie čísel, algebraické struktury – popište účel a způsob výpočtu Eulerovy funkce. Popište požadavky na grupu a způsob generování grupy pro algoritmy založené na problému DL.
 - [x] Modulární aritmetika – popište algoritmus Square and Multiply a Čínskou větu o zbytcích.
-- [ ] Symetrická kryptografie – proudové šifry, synchronní a asynchronní proudové šifry.
-- [ ] Blokové šifry - Product Ciphers, konstrukce, Feistelova síť, DES, AES, základní módy blokových šifer.
+- [x] Symetrická kryptografie – proudové šifry, synchronní a asynchronní proudové šifry.
+- [x] Blokové šifry - Product Ciphers, konstrukce, Feistelova síť, DES, AES, základní módy blokových šifer.
 - [x] Asymetrické algoritmy - RSA, Diffie-Hellman, ECDH systém a jejich využití pro digitální podpis.
 - [x] Hašovací funkce - vlastnosti, princip, použití, kolize, odolnost proti kolizím, příklady.
 - [ ] PKI - certifikát X.509 struktura, certifikační autorita základní části, časová razítka, autorita časových razítek.
@@ -57,12 +57,15 @@ Každá aktualizace spouští automatický build všech předmětových otázek,
 
 - [x] Správa paměti, statické přidělování paměti, dynamické pěidelování paměti, garbage collector, reprezentace informace v paměti
 - [x] Jazyk UML a objektově orientovaný návrh - dědicnost, generalizace, asociace 1:n, n:1, n:n, agregace a kompozice.
-- [x] Třídy složitosti pamětové a časové. Notace Theta. Notace Omega. Notace velké-O. Asymptotický popis složitosti algoritmu. Posouzení složitosti algoritmů. 4) Posouzení složitosti algoritmu vyhledávání. Srovnání lineárních a nelineárních struktur. Vztah časové a paměťové složitosti. 
+- [x] Třídy složitosti pamětové a časové. Notace Theta. Notace Omega. Notace velké-O. Asymptotický popis složitosti algoritmu. Posouzení složitosti algoritmů. 
+- [x] Posouzení složitosti algoritmu vyhledávání. Srovnání lineárních a nelineárních struktur. Vztah časové a paměťové složitosti. 
 - [x] Abstraktní datový typ (ADT). ADT lineární seznam. ADT cyklický seznam. Operace vkládání, mazání a vyhledávání prvku v ADT lineární seznam. ADT zásobník, ADT fronta.
 - [x] Abstraktní datový typ strom. Abstraktní datový typ binární strom. Úplný binární strom. Abstraktní datový typ binární vyhledávací strom (operace vložení, odstranení, smazání uzlu stromu). Průchody stromy in-order, pre-order, post-order.
-- [x] Problematika nevyvážených stromů. Vyvažování stromů AVL - rotace: jednoduchá levá, jednoduchá pravá, dvojitá levá, dvojitá pravá. Red-Black stromy. 7) Posouzení z pohledu časové a paměťové složitosti. ADT hashovací tabulky. Rešení kolizí hashovacích tabulek. Srovnání výkonnosti binárních vyhledávacích stromu a hashovacích tabulek.
+- [x] Problematika nevyvážených stromů. Vyvažování stromů AVL - rotace: jednoduchá levá, jednoduchá pravá, dvojitá levá, dvojitá pravá. Red-Black stromy. 
+- [x] Posouzení z pohledu časové a paměťové složitosti. ADT hashovací tabulky. Rešení kolizí hashovacích tabulek. Srovnání výkonnosti binárních vyhledávacích stromu a hashovacích tabulek.
 - [x] Jednoduché a pokročilejší řadící techniky a jejich srovnání. Stabilita řadícího algoritmu. Bubble sort. Insertion sort. Selection sort. Shell sort. Merge sort. Heap sort. Quick sort.
-- [x] Grafy, formální definice. Vyhledávání v grafech. Algoritmus BFS (prohledávání do šírky). Reprezentace BFS v paměti. Algoritmus DFS (prohledávání do hloubky). 10) Omezené prohledávání do hloubky (DLS). Iterativní prohledávání do šířky (IDLS), Dijkstrův algoritmus (Uniform Cost Search), A*
+- [x] Grafy, formální definice. Vyhledávání v grafech. Algoritmus BFS (prohledávání do šírky). Reprezentace BFS v paměti. Algoritmus DFS (prohledávání do hloubky). 
+- [x] Omezené prohledávání do hloubky (DLS). Iterativní prohledávání do šířky (IDLS), Dijkstrův algoritmus (Uniform Cost Search), A*
 - [x] Evlouční algoritmy. Genetické algoritmy, genetické programování. Pojmy populace, mutace, krížení, chromozom. Princip evolučních algoritmů.
 - [x] Parallel computing and architectures, processes, threads and their synchroization. Dead lock.
 
