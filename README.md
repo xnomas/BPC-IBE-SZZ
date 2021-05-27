@@ -17,13 +17,13 @@ Každá aktualizace spouští automatický build všech předmětových otázek,
 ### BPC-AKR
 
 - [x] Prvočísla – popište způsob generování a uveďte příklad pravděpodobnostního testu a skutečného testu.
-- [ ] Teorie čísel, algebraické struktury – popište účel a způsob výpočtu Eulerovy funkce. Popište požadavky na grupu a způsob generování grupy pro algoritmy založené na problému DL.
+- [x] Teorie čísel, algebraické struktury – popište účel a způsob výpočtu Eulerovy funkce. Popište požadavky na grupu a způsob generování grupy pro algoritmy založené na problému DL.
 - [x] Modulární aritmetika – popište algoritmus Square and Multiply a Čínskou větu o zbytcích.
 - [x] Symetrická kryptografie – proudové šifry, synchronní a asynchronní proudové šifry.
 - [x] Blokové šifry - Product Ciphers, konstrukce, Feistelova síť, DES, AES, základní módy blokových šifer.
 - [x] Asymetrické algoritmy - RSA, Diffie-Hellman, ECDH systém a jejich využití pro digitální podpis.
 - [x] Hašovací funkce - vlastnosti, princip, použití, kolize, odolnost proti kolizím, příklady.
-- [ ] PKI - certifikát X.509 struktura, certifikační autorita základní části, časová razítka, autorita časových razítek.
+- [x] PKI - certifikát X.509 struktura, certifikační autorita základní části, časová razítka, autorita časových razítek.
 - [x] Generování náhodných čísel - kryptografické generátory, požadavky, použití, princip, testování generátorů.
 - [ ] Bezpečnostní architektura RM OSI - služby bezpečnosti, mechanizmy bezpečnosti, útoky na bezpečnost, příklady implementace bezpečnostních mechanizmů v jednotlivých vrstvách. 
 
@@ -42,16 +42,16 @@ Každá aktualizace spouští automatický build všech předmětových otázek,
 
 ### BPC-KOM
 
-- [ ] Technika sítí a protokolů - komunikační modely, způsob přenosu informace, základní struktura sítí, typy sítí, architektura komunikace systémů.
-- [ ] Základní popis referenčního modelu ISO/OSI a srovnání s TCP/IP.
-- [ ] Základní popis síťového modelu TCP/IP a srovnání s ISO/OSI.
-- [ ] Principy komunikačních technik - vícenásobné využití cest, zajištění obousměrné komunikace.
-- [ ] Fyzická vrstva přenosových systémů - přenosová média, analogové a digitální modulace, klíčovací techniky, princip digitalizace řečového signálu.
-- [ ] Spojová vrstva přenosových systémů - podvrstvy, rámce spojové vrstvy, adresace, metody zajištění spolehlivého přenosu.
-- [ ] Síťová vrstva přenosových systémů - spínání paketů, služby síťové vrstvy, IPv4 adresy, techniky směrování, IPv4 datagram.
-- [ ] Síťová vrstva přenosových systémů - tunelování paketů, ARP, NAT, ICMPv4, IPv6.
-- [ ] Transportní vrstva přenosových systémů - služby transportní vrstvy, UDP protokol, TCP protokol.
-- [ ] Aplikační vrstva přenosových systémů - DHCP protokol, DNS systém, přenos souborů, webové protokoly, elektronická pošta.
+- [x] Technika sítí a protokolů - komunikační modely, způsob přenosu informace, základní struktura sítí, typy sítí, architektura komunikace systémů.
+- [x] Základní popis referenčního modelu ISO/OSI a srovnání s TCP/IP.
+- [x] Základní popis síťového modelu TCP/IP a srovnání s ISO/OSI.
+- [x] Principy komunikačních technik - vícenásobné využití cest, zajištění obousměrné komunikace.
+- [x] Fyzická vrstva přenosových systémů - přenosová média, analogové a digitální modulace, klíčovací techniky, princip digitalizace řečového signálu.
+- [x] Spojová vrstva přenosových systémů - podvrstvy, rámce spojové vrstvy, adresace, metody zajištění spolehlivého přenosu.
+- [x] Síťová vrstva přenosových systémů - spínání paketů, služby síťové vrstvy, IPv4 adresy, techniky směrování, IPv4 datagram.
+- [x] Síťová vrstva přenosových systémů - tunelování paketů, ARP, NAT, ICMPv4, IPv6.
+- [x] Transportní vrstva přenosových systémů - služby transportní vrstvy, UDP protokol, TCP protokol.
+- [x] Aplikační vrstva přenosových systémů - DHCP protokol, DNS systém, přenos souborů, webové protokoly, elektronická pošta.
 
 ### BPC-TIN
 
@@ -170,7 +170,7 @@ Každá aktualizace spouští automatický build všech předmětových otázek,
 
 - [x] Software jako předmět právní ochrany - srovnání ochrany autorskoprávní a patentové ochrany
 - [x] Autorství software - autor, spoluautor, kolektivní dílo, souborné dílo, odvozené dílo, otázka autorství umělé inteligence
-- [ ] Osobnostní a majetková práva autora software - obsah, doba trvání, vyčerpání práv
+- [x] Osobnostní a majetková práva autora software - obsah, doba trvání, vyčerpání práv
 - [x] Omezení rozsahu práv autora k software - dekompilace, reverzní inženýrství a další
 - [x] Ochrana neliterárních složek software - ochrana funkcionality; ochrana datových, grafických uživatelských a aplikačních programových rozhraní)
 - [x] Software jako zaměstnanecké dílo, školní dílo, kolektivní dílo a dílo na objednávku
@@ -181,13 +181,13 @@ Každá aktualizace spouští automatický build všech předmětových otázek,
 
 ### BPC-UP2A
 
-- [ ] Veřejnoprávní ochrana autorského práva
-- [ ] Elektronický podpis a elektronická pečeť – právní úprava a druhy
-- [ ] Datové schránky – právní úprava a praxe používání
-- [ ] Provozní a lokalizační údaje a jejich využití v trestním řízení
-- [ ] Právní úprava kybernetické bezpečnosti v CR - základní principy
+- [x] Veřejnoprávní ochrana autorského práva
+- [x] Elektronický podpis a elektronická pečeť – právní úprava a druhy
+- [x] Datové schránky – právní úprava a praxe používání
+- [x] Provozní a lokalizační údaje a jejich využití v trestním řízení
+- [x] Právní úprava kybernetické bezpečnosti v CR - základní principy
 - [x] Ochrana osobních údajů – vymezení osob a základní principy zpracování osobních údajů
 - [x] Povinnosti správce a zpracovatele osobních údajů
 - [x] Práva subjektu údajů ve vztahu ke správci a zpracovateli
-- [ ] Informace veřejného sektoru – pojem, česká a evropská právní úprava
+- [x] Informace veřejného sektoru – pojem, česká a evropská právní úprava
 - [x] Otevřená data – pojem a právní úprava
